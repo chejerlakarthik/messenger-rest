@@ -1,7 +1,8 @@
 package org.javabrains.messenger.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,7 +13,7 @@ public class Message {
 	private String messageContent;
 	private String author;
 	private Date createdDate;
-	private List<Comment> listOfComments;
+	private Map<Long,Comment> comments = new HashMap<Long,Comment>();
 	
 	public Message(){
 	}
@@ -80,16 +81,16 @@ public class Message {
 	}
 
 	/**
-	 * @return the listOfComments
+	 * @return the comments
 	 */
-	public List<Comment> getListOfComments() {
-		return listOfComments;
+	public Map<Long, Comment> getComments() {
+		return comments;
 	}
 
 	/**
-	 * @param listOfComments the listOfComments to set
+	 * @param comments the comments to set
 	 */
-	public void setListOfComments(List<Comment> listOfComments) {
-		this.listOfComments = listOfComments;
+	public void setComments(Map<Long, Comment> comments) {
+		this.comments = comments;
 	}
 }
