@@ -13,7 +13,7 @@ public class MessageService {
 	private Map<Long,Message> messages = Database.getMessages();
 	
 	public MessageService(){
-		messages.put(1L, new Message(1, "Hello World!", "Chejerla Karthik"));
+		messages.put(1L, new Message(1L, "Hello World!", "Chejerla Karthik"));
 		messages.put(2L, new Message(2L, "Hello India!", "Kaushik"));
 	}
 	

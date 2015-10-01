@@ -2,12 +2,30 @@ package org.javabrains.messenger.model;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Comment {
 	
 	private long commentId;
 	private String commentText;
 	private String commentAuthor;
 	private Date createdDate;
+	
+	public Comment(){
+		this.commentId = 1;
+		this.commentText = "Default Comment";
+		this.commentAuthor = "Karthik";
+		this.createdDate = new Date();
+	}
+	
+	public Comment(long commentId, String commentText, String commentAuthor,
+			Date createdDate) {
+		this.commentId = commentId;
+		this.commentText = commentText;
+		this.commentAuthor = commentAuthor;
+		this.createdDate = createdDate;
+	}
 	
 	/**
 	 * @return the commentId

@@ -23,12 +23,17 @@ public class Message {
 	 * @param messageContent
 	 * @param author
 	 * @param createdDate
+	 * @param comments
 	 */
 	public Message(long messageId, String messageContent, String author) {
 		this.messageId = messageId;
 		this.messageContent = messageContent;
 		this.author = author;
 		this.createdDate = new Date();
+		this.comments = new HashMap<Long,Comment>();
+		
+		Comment defaultComment = new Comment();
+		this.comments.put(defaultComment.getCommentId(), defaultComment);
 	}
 	
 	/**
@@ -37,6 +42,7 @@ public class Message {
 	public long getMessageId() {
 		return messageId;
 	}
+
 	/**
 	 * @param messageId the messageId to set
 	 */
