@@ -24,8 +24,7 @@ public class MessageService {
 	public List<Message> getAllMessagesForYear(int year){
 		List<Message> messagesForYear = new ArrayList<Message>();
 		Calendar cal = Calendar.getInstance();
-		for(Message message : messages.values())
-		{
+		for(Message message : messages.values()){
 			cal.setTime(message.getCreatedDate());
 			if(cal.get(Calendar.YEAR) == year){
 				messagesForYear.add(message);
@@ -55,8 +54,8 @@ public class MessageService {
 		return messages.get(message.getMessageId());
 	}
 	
-	public Message updateMessage(Message message){
-		if(message.getMessageId() <= 0){
+	public Message updateMessage(Message message) {
+		if(!messages.containsKey(message.getMessageId())){
 			return null;
 		}
 		else{

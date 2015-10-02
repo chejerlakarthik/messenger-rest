@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.javabrains.messenger.exception.DataNotFoundException;
 import org.javabrains.messenger.model.Message;
 import org.javabrains.messenger.resources.beans.MessageFilterBean;
 import org.javabrains.messenger.service.MessageService;
@@ -41,8 +42,12 @@ public class MessageResource {
 
 	@GET
 	@Path("/{messageId}")
-	public Message getMessage(@PathParam("messageId") Long messageId) {
-		return messageService.getMessage(messageId);
+	public Message getMessage(@PathParam("messageId") Long messageId) throws DataNotFoundException {
+		Message message = messageService.getMessage(messageId);
+		if(null == message){
+			throw new DataNotFoundException("Cannot find a message with id:"+ messageId);
+		}
+		return message;
 	}
 
 	@DELETE
@@ -63,9 +68,13 @@ public class MessageResource {
 	@PUT
 	@Path("/{messageId}")
 	public Message updateMessage(@PathParam("messageId") long id,
-			Message message) {
+			Message message) throws DataNotFoundException{
 		message.setMessageId(id);
-		return messageService.updateMessage(message);
+		Message updateMessage = messageService.updateMessage(message);
+		if(null == updateMessage){
+			throw new DataNotFoundException("Message with id "+ message.getMessageId() + " not found!! Update failed !!");
+		}
+		return updateMessage;
 	}
 	
 	@Path("/{messageId}/comments")

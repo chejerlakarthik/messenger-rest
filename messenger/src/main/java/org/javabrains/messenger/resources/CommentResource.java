@@ -8,14 +8,18 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.javabrains.messenger.model.Comment;
+import org.javabrains.messenger.model.ErrorMessage;
 import org.javabrains.messenger.service.CommentService;
 
 /**
@@ -55,6 +59,15 @@ public class CommentResource {
 	@Path("/{commentId}")
 	public Comment updateComment(@PathParam("messageId") long messageId, @PathParam("commentId") long commentId, Comment comment){
 		comment.setCommentId(commentId);
-		return commentService.updateComment(messageId, comment);
+		Comment updateComment = commentService.updateComment(messageId, comment);
+		
+		Response response = Response.status(Status.NOT_FOUND)
+									.entity(new ErrorMessage(404,"Not found for Update","http://javabrains.koughik.org"))
+									.build();
+		
+		if(null == updateComment){
+			throw new NotFoundException(response);
+		}
+		return updateComment;
 	}
 }
