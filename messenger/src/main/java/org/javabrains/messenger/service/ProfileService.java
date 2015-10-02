@@ -15,8 +15,8 @@ public class ProfileService {
 	public ProfileService() {
 		profiles.put("chejerla.karthik", new Profile("chejerla.karthik",
 				"Karthik", "Chejerla"));
-		profiles.put("aarthi.sundar", new Profile("aarthi.sundar", "Aarthi",
-				"Sundar"));
+		profiles.put("koushik.kothagal", new Profile("koushik.kothagal", "Koushik",
+				"Kothagal"));
 	}
 
 	public List<Profile> getAllProfiles() {
