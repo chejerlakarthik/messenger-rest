@@ -75,4 +75,14 @@ public class Comment {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Comment [commentId=" + commentId + ", commentText="
+				+ commentText + ", commentAuthor=" + commentAuthor
+				+ ", createdDate=" + createdDate + "]";
+	}
 }

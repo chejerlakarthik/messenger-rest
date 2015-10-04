@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.javabrains.messenger.model.Database;
+import org.javabrains.messenger.model.Link;
 import org.javabrains.messenger.model.Message;
 /**
  * 
@@ -82,8 +83,10 @@ public class MessageService {
 	 * @return
 	 */
 	public Message removeMessage(Long messageId){
+		if(!messages.containsKey(messageId)){
+			return null;
+		}
 		return messages.remove(messageId);
-		
 	}
 	
 	/**
@@ -109,7 +112,8 @@ public class MessageService {
 			return null;
 		}
 		else{
-			messages.put(message.getMessageId(), message);
+			messages.get(message.getMessageId()).setMessageContent(message.getMessageContent());
+			messages.get(message.getMessageId()).setLinks(new ArrayList<Link>());
 			return messages.get(message.getMessageId());
 		}
 	}

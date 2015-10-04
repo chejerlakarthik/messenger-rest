@@ -129,4 +129,15 @@ public class Message {
 		link.setRel(rel);
 		links.add(link);
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Message [messageId=" + messageId + ", messageContent="
+				+ messageContent + ", author=" + author + ", createdDate="
+				+ createdDate + ", comments=" + comments + ", links=" + links
+				+ "]";
+	}
 }

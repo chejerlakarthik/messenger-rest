@@ -35,4 +35,11 @@ public class Link {
 	public void setRel(String rel) {
 		this.rel = rel;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Link [link=" + link + ", rel=" + rel + "]";
+	}
 }

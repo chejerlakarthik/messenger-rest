@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.javabrains.messenger.exception.DataNotFoundException;
@@ -38,7 +39,7 @@ public class MessageResource {
 	 * @return
 	 */
 	@GET
-	public List<Message> getAllMessages(@BeanParam MessageFilterBean filterBean, @Context UriInfo uriInfo ) {
+	public List<Message> getAllMessagesJson(@BeanParam MessageFilterBean filterBean, @Context UriInfo uriInfo ) {
 		if(filterBean.getYear() > 0){
 			return messageService.getAllMessagesForYear(filterBean.getYear());
 		}
@@ -70,9 +71,11 @@ public class MessageResource {
 		if(null == message){
 			throw new DataNotFoundException("Cannot find a message with id:"+ messageId);
 		}
-		message.addLink(getUriForSelf(message, uriInfo), "self");
-		message.addLink(getUriForProfile(message,uriInfo),"profile");
-		message.addLink(getUriForComments(message,uriInfo),"comments");
+		if(message.getLinks().size() == 0){
+			message.addLink(getUriForSelf(message, uriInfo), "self");
+			message.addLink(getUriForProfile(message,uriInfo),"profile");
+			message.addLink(getUriForComments(message,uriInfo),"comments");
+		}
 		return message;
 	}
 	
@@ -83,8 +86,15 @@ public class MessageResource {
 	 */
 	@DELETE
 	@Path("/{messageId}")
-	public void deleteMessage(@PathParam("messageId") Long id) {
-		messageService.removeMessage(id);
+	@Produces(MediaType.TEXT_XML)
+	public Response deleteMessage(@PathParam("messageId") Long id) {
+		System.out.println("delete method from resource");
+		Message removeMessage = messageService.removeMessage(id);
+		Response response = Response.status(Status.OK)
+						//			.header("Content-Type",MediaType.TEXT_XML)
+									.entity(removeMessage)
+									.build();
+		return response;
 	}
 	
 	/**
