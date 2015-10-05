@@ -39,7 +39,8 @@ public class MessageResource {
 	 * @return
 	 */
 	@GET
-	public List<Message> getAllMessagesJson(@BeanParam MessageFilterBean filterBean, @Context UriInfo uriInfo ) {
+	public List<Message> getAllMessagesJson(@BeanParam MessageFilterBean filterBean, @Context UriInfo uriInfo) {
+		
 		if(filterBean.getYear() > 0){
 			return messageService.getAllMessagesForYear(filterBean.getYear());
 		}
@@ -49,9 +50,11 @@ public class MessageResource {
 		List<Message> allMessages = messageService.getAllMessages();
 		
 		for(Message message : allMessages){
-			message.addLink(getUriForSelf(message, uriInfo), "self");
-			message.addLink(getUriForProfile(message,uriInfo),"profile");
-			message.addLink(getUriForComments(message,uriInfo),"comments");
+			if(message.getLinks().size() == 0){
+				message.addLink(getUriForSelf(message, uriInfo), "self");
+				message.addLink(getUriForProfile(message,uriInfo),"profile");
+				message.addLink(getUriForComments(message,uriInfo),"comments");
+			}
 		}
 		return allMessages;
 	}
@@ -195,4 +198,5 @@ public class MessageResource {
 				            .resolveTemplate("messageId", message.getMessageId())	// this is to substitute the variable field in path with value
 				            .build().toString();
 	}
+	
 }

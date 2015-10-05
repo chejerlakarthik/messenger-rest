@@ -15,7 +15,7 @@ public class Comment {
 	public Comment(){
 		this.commentId = 1;
 		this.commentText = "Default Comment";
-		this.commentAuthor = "Karthik";
+		this.commentAuthor = "Default Author";
 		this.createdDate = new Date();
 	}
 	

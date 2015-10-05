@@ -2,7 +2,7 @@ package org.javabrains.messenger.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name="error")
 public class ErrorMessage {
 
 	private long errorCode;
