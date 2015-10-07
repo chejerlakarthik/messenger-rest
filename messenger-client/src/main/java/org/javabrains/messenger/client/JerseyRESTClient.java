@@ -34,26 +34,26 @@ public class JerseyRESTClient {
 		
 		JerseyRESTClient restClient = new JerseyRESTClient();
 		final URI BASE_URI = new URI("http://localhost:8080/messenger/webapi");
-		/*// Create a new message
+		// Create a new message
 		Message message = new Message(0, "message created from jax-rs client",
 				"Karthik Chejerla");
 		restClient.createMessage(BASE_URI, message);
 		message = new Message(0, "another message created from jax-rs client",
 				"Ravi Teja");
-		restClient.createMessage(BASE_URI, message);*/
+		restClient.createMessage(BASE_URI, message);
 
 		// Get all available messages
 		restClient.getAllMessages(BASE_URI);
 		
 		// Get message by messageId
-		/*restClient.getMessageById(BASE_URI, 4);
+		restClient.getMessageById(BASE_URI, 4);
 		
 		// Update a message by messageId
 		Message updateMessage = new Message(3, "message created from jax-rs client - updated", "Karthik Chejerla");
 		restClient.updateMessage(BASE_URI, updateMessage);
 		
 		// Delete a message by messageId
-		restClient.deleteMessage(BASE_URI, 4);*/
+		restClient.deleteMessage(BASE_URI, 4);
 	}	
 
 	private void getAllMessages(final URI BASE_URI) {
