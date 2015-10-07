@@ -22,9 +22,6 @@ public class HttpBasicAuthenticationService {
 			httpBasicAuthToken = basicAuthString.substring(6);
 		}
 		
-		System.out.println(httpBasicAuthToken);
-		System.out.println(validToken);
-		
 		return (httpBasicAuthToken.equals(validToken) ? Boolean.TRUE
 				: Boolean.FALSE);
 	}
